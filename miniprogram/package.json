@@ -1,0 +1,10 @@
+{
+  "name": "xiaozhi-iot-miniapp",
+  "version": "1.0.0",
+  "description": "Xiaozhi IoT WeChat Mini Program monitor and control client",
+  "main": "app.js",
+  "scripts": {
+    "check": "node scripts/check-syntax.js && node scripts/check-production-auth.js"
+  },
+  "dependencies": {}
+}

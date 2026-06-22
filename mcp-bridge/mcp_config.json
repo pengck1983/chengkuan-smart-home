@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "chengkuan-smart-home": {
+      "type": "stdio",
+      "command": ".venv\\Scripts\\python.exe",
+      "args": ["-m", "smart_home_mcp"]
+    }
+  }
+}

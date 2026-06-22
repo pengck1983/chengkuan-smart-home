@@ -1,0 +1,244 @@
+page {
+  background: #7ec6df;
+}
+
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 36rpx;
+  background: linear-gradient(180deg, #3f91bd 0%, #8dd9e4 48%, #eef7f8 100%);
+}
+
+.hero {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 520rpx;
+  padding: 54rpx 42rpx 26rpx;
+  color: #ffffff;
+}
+
+.hero-actions {
+  position: absolute;
+  top: 34rpx;
+  right: 32rpx;
+  display: flex;
+  gap: 26rpx;
+}
+
+.ghost-icon {
+  width: 72rpx;
+  height: 72rpx;
+  padding: 0;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 42rpx;
+  line-height: 72rpx;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+button::after {
+  border: 0;
+}
+
+.home-name {
+  margin-top: 76rpx;
+  font-size: 54rpx;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.weather-line {
+  position: absolute;
+  top: 156rpx;
+  right: 48rpx;
+  font-size: 36rpx;
+  opacity: 0.9;
+}
+
+.room-tabs {
+  display: flex;
+  align-items: center;
+  gap: 48rpx;
+  margin-top: 88rpx;
+  white-space: nowrap;
+}
+
+.room-tab {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 38rpx;
+  font-weight: 600;
+}
+
+.room-tab.active {
+  position: relative;
+  color: #ffffff;
+}
+
+.room-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -20rpx;
+  width: 80rpx;
+  height: 4rpx;
+  border-radius: 4rpx;
+  background: #ffffff;
+}
+
+.quick-row {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 66rpx;
+}
+
+.quick-chip {
+  min-width: 170rpx;
+  min-height: 110rpx;
+  box-sizing: border-box;
+  padding: 18rpx 24rpx;
+  border-radius: 28rpx;
+  color: #ffffff;
+  font-size: 26rpx;
+  background: rgba(17, 32, 45, 0.78);
+}
+
+.quick-icon {
+  margin-bottom: 12rpx;
+  color: #c7d6df;
+  font-size: 24rpx;
+}
+
+.content {
+  box-sizing: border-box;
+  margin-top: -24rpx;
+  padding: 0 28rpx;
+}
+
+.scene-card {
+  width: 410rpx;
+  height: 118rpx;
+  box-sizing: border-box;
+  margin-bottom: 24rpx;
+  padding: 38rpx 42rpx;
+  border-radius: 34rpx;
+  color: #102033;
+  font-size: 34rpx;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.state-card {
+  box-sizing: border-box;
+  margin-bottom: 22rpx;
+  padding: 28rpx;
+  border-radius: 18rpx;
+  color: #607086;
+  font-size: 26rpx;
+  line-height: 1.5;
+  background: #ffffff;
+}
+
+.error {
+  color: #b4233f;
+}
+
+.device-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22rpx;
+}
+
+.device-card {
+  position: relative;
+  min-height: 256rpx;
+  box-sizing: border-box;
+  padding: 30rpx 28rpx;
+  border-radius: 28rpx;
+  background: rgba(230, 245, 249, 0.88);
+  box-shadow: 0 10rpx 24rpx rgba(23, 45, 59, 0.08);
+}
+
+.device-card.device-on {
+  background: #ffffff;
+}
+
+.device-icon {
+  width: 54rpx;
+  height: 54rpx;
+  border-radius: 14rpx;
+  color: #3a7f8f;
+  font-size: 24rpx;
+  font-weight: 700;
+  line-height: 54rpx;
+  text-align: center;
+  background: linear-gradient(180deg, #f5fbff, #d8eef3);
+}
+
+.device-icon.light {
+  color: #cb8b00;
+  background: linear-gradient(180deg, #fff6c9, #ffcdd9);
+}
+
+.device-icon.sensor {
+  color: #246b8e;
+}
+
+.power-button {
+  position: absolute;
+  top: 28rpx;
+  right: 28rpx;
+  width: 72rpx;
+  height: 72rpx;
+  padding: 0;
+  border-radius: 50%;
+  color: #203040;
+  font-size: 30rpx;
+  line-height: 72rpx;
+  background: #dce8ee;
+}
+
+.power-button.on {
+  color: #ffffff;
+  background: #12c98a;
+}
+
+.primary-value {
+  position: absolute;
+  left: 28rpx;
+  top: 104rpx;
+  max-width: 210rpx;
+  overflow: hidden;
+  color: #102033;
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.device-bottom {
+  position: absolute;
+  left: 28rpx;
+  right: 24rpx;
+  bottom: 28rpx;
+}
+
+.device-name {
+  overflow: hidden;
+  color: #102033;
+  font-size: 32rpx;
+  font-weight: 700;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.device-meta {
+  overflow: hidden;
+  margin-top: 8rpx;
+  color: #788695;
+  font-size: 24rpx;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

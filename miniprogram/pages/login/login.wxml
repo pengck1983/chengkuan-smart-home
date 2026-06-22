@@ -1,0 +1,10 @@
+<view class="login-page">
+  <view class="brand">成宽智慧小家</view>
+  <view class="subtitle">使用微信登录后管理你的网关和设备</view>
+
+  <button class="login-button" loading="{{loading}}" bindtap="login">
+    微信一键登录
+  </button>
+
+  <view wx:if="{{errorText}}" class="error">{{errorText}}</view>
+</view>

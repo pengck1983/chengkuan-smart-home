@@ -1,0 +1,23 @@
+<view class="page">
+  <view class="card">
+    <view class="title">添加网关</view>
+    <view class="desc">网关已经提前配置好网络和 EMQX，只需要把网关 MAC 绑定到当前微信账号。</view>
+
+    <view class="field">
+      <view class="label">网关 MAC</view>
+      <input class="input" value="{{gatewayMac}}" placeholder="例如 a1b2c3d4e5f6" bindinput="onGatewayMacInput" />
+    </view>
+
+    <view class="field">
+      <view class="label">网关名称</view>
+      <input class="input" value="{{gatewayName}}" placeholder="例如 家庭网关" bindinput="onGatewayNameInput" />
+    </view>
+
+    <view class="button-row">
+      <button class="secondary" bindtap="scanGateway">扫码</button>
+      <button class="primary" loading="{{loading}}" bindtap="bindGateway">绑定网关</button>
+    </view>
+
+    <view wx:if="{{errorText}}" class="error">{{errorText}}</view>
+  </view>
+</view>

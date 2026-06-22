@@ -1,0 +1,40 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+config/server.js
+config/config.js
+project.private.config.json
+
+# Runtime data and logs
+data/
+*.log
+*.pid
+*.map
+*.sourcemap
+
+# Dependencies and caches
+node_modules/
+miniprogram_npm/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Temporary release artifacts
+*.zip
+*.tmp
+*.bak
+

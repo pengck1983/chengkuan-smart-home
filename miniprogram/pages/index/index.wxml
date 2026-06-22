@@ -1,0 +1,55 @@
+<view class="page">
+  <view class="hero">
+    <view class="hero-actions">
+      <button class="ghost-icon" bindtap="refresh">↻</button>
+      <button class="ghost-icon" bindtap="addDevice">＋</button>
+    </view>
+    <view class="home-name">成宽之家</view>
+    <view class="weather-line">☁ 26°</view>
+    <view class="room-tabs">
+      <view class="room-tab active">全屋</view>
+      <view class="room-tab">客厅</view>
+      <view class="room-tab">主卧室</view>
+      <view class="room-tab">次卧</view>
+    </view>
+    <view class="quick-row">
+      <view class="quick-chip">
+        <view class="quick-icon">温</view>
+        <view>{{sensorSummary}}</view>
+      </view>
+      <view class="quick-chip">
+        <view class="quick-icon">电</view>
+        <view>{{runningSummary}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="state-card">加载中...</view>
+  <view wx:elif="{{errorText}}" class="state-card error">{{errorText}}</view>
+
+  <view wx:else class="content">
+    <view class="scene-card">回家</view>
+
+    <view wx:if="{{!devices.length}}" class="state-card">
+      当前账号还没有发现设备。请点击右上角 + 让网关进入添加设备状态。
+    </view>
+
+    <view class="device-grid">
+      <view wx:for="{{devices}}" wx:key="deviceId" class="device-card {{item.on ? 'device-on' : ''}}" data-id="{{item.deviceId}}" bindtap="openDevice">
+        <view class="device-icon {{item.type}}">
+          <text wx:if="{{item.type === 'meterSocket'}}">插</text>
+          <text wx:elif="{{item.type === 'sensor'}}">温</text>
+          <text wx:elif="{{item.type === 'light'}}">灯</text>
+          <text wx:elif="{{item.type === 'speaker'}}">声</text>
+          <text wx:else>智</text>
+        </view>
+        <button wx:if="{{item.type === 'meterSocket' || item.type === 'light'}}" class="power-button {{item.on ? 'on' : ''}}" data-id="{{item.deviceId}}" data-type="{{item.type}}" data-on="{{item.nextOn}}" catchtap="switchDevice">⏻</button>
+        <view class="primary-value">{{item.primaryValue}}</view>
+        <view class="device-bottom">
+          <view class="device-name">{{item.name}}</view>
+          <view class="device-meta">{{item.room}}｜{{item.summaryText}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

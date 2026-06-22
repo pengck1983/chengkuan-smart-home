@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/gateway/gateway",
+    "pages/index/index",
+    "pages/device/device",
+    "pages/add-device/add-device",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "navigationBarTitleText": "成宽智慧小家",
+    "navigationBarBackgroundColor": "#0f766e",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#7a8798",
+    "selectedColor": "#0f766e",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "智家"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  }
+}

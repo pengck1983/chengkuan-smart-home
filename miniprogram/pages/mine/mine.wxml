@@ -1,0 +1,28 @@
+<view class="page">
+  <view class="profile-card">
+    <view class="avatar">我</view>
+    <view>
+      <view class="name">{{user.nickname || '微信用户'}}</view>
+      <view class="sub">已登录成宽智慧小家</view>
+    </view>
+  </view>
+
+  <view class="panel">
+    <view class="panel-title">网关</view>
+    <view class="info-row">
+      <text>名称</text>
+      <text>{{gateway.name || '未绑定'}}</text>
+    </view>
+    <view class="info-row">
+      <text>MAC</text>
+      <text>{{gateway.gatewayMac || '--'}}</text>
+    </view>
+    <view class="info-row">
+      <text>状态</text>
+      <text>{{gateway.online ? '在线' : '等待上报'}}</text>
+    </view>
+    <button class="secondary" bindtap="addGateway">添加/更换网关</button>
+  </view>
+
+  <button class="logout" bindtap="logout">退出登录</button>
+</view>

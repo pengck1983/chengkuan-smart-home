@@ -1,0 +1,42 @@
+.login-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 180rpx 48rpx 48rpx;
+  background: #f5f7fb;
+}
+
+.brand {
+  color: #172033;
+  font-size: 48rpx;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.subtitle {
+  margin-top: 20rpx;
+  color: #607086;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.login-button {
+  margin-top: 72rpx;
+  height: 88rpx;
+  border-radius: 8rpx;
+  color: #ffffff;
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 88rpx;
+  background: #0f766e;
+}
+
+.login-button::after {
+  border: 0;
+}
+
+.error {
+  margin-top: 28rpx;
+  color: #b4233f;
+  font-size: 26rpx;
+  line-height: 1.5;
+}

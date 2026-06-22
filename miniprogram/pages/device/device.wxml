@@ -1,0 +1,123 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="state-card">加载中...</view>
+  <view wx:elif="{{errorText}}" class="state-card error">{{errorText}}</view>
+
+  <view wx:else>
+    <view class="header-card">
+      <view>
+        <view class="title-row">
+          <view class="device-title">{{device.name}}</view>
+          <button class="rename-button" bindtap="renameDevice">改名</button>
+        </view>
+        <view class="device-meta">{{device.typeName}} · {{device.room}} · {{device.onlineText}}</view>
+      </view>
+      <view wx:if="{{device.type === 'meterSocket' || device.type === 'light'}}" class="switch-row">
+        <button class="round on" data-on="true" bindtap="switchCurrent">开</button>
+        <button class="round off" data-on="false" bindtap="switchCurrent">关</button>
+      </view>
+    </view>
+
+    <view wx:if="{{device.type !== 'light' && device.type !== 'speaker'}}" class="section">
+      <view class="section-title">当前状态</view>
+      <view class="metrics">
+        <view wx:for="{{device.metrics}}" wx:for-item="metric" wx:key="*this" class="metric">
+          <view class="metric-label">{{metric[0]}}</view>
+          <view class="metric-value">{{metric[1]}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{device.type === 'meterSocket'}}" class="section">
+      <view class="section-title">定时开关</view>
+      <view class="timer-row">
+        <picker mode="time" value="{{scheduleTime}}" bindchange="onTimeChange">
+          <view class="time-box">{{scheduleTime}}</view>
+        </picker>
+        <view class="segmented">
+          <button class="{{scheduleAction === 'on' ? 'active' : ''}}" data-action="on" bindtap="onActionChange">开启</button>
+          <button class="{{scheduleAction === 'off' ? 'active' : ''}}" data-action="off" bindtap="onActionChange">关闭</button>
+        </view>
+        <button class="add-timer" bindtap="addSchedule">添加</button>
+      </view>
+      <view wx:for="{{schedules}}" wx:key="id" class="schedule-row">
+        <text>{{item.time}} 每天 {{item.action === 'on' ? '开启' : '关闭'}}</text>
+        <button data-id="{{item.id}}" bindtap="deleteSchedule">删除</button>
+      </view>
+      <view wx:if="{{!schedules.length}}" class="empty">暂无定时任务</view>
+    </view>
+
+    <view wx:if="{{device.type === 'sensor'}}" class="section">
+      <view class="section-title">环境记录</view>
+      <view class="time-line">当前时间：{{nowText}}</view>
+      <view class="time-line">过去 24 小时趋势</view>
+      <view wx:for="{{chartRows}}" wx:key="label" class="chart-card">
+        <view class="chart-head">
+          <text>{{item.label}}</text>
+          <text>{{item.latest}}</text>
+        </view>
+        <view class="line-chart">
+          <view class="y-axis">
+            <text>{{item.maxText}}</text>
+            <text>{{item.minText}}</text>
+          </view>
+          <view wx:for="{{item.segments}}" wx:for-item="seg" wx:key="*this" class="line-segment" style="left: {{seg.left}}%; top: {{seg.top}}%; width: {{seg.width}}%; transform: rotate({{seg.angle}}deg);"></view>
+          <view wx:for="{{item.points}}" wx:for-item="point" wx:key="*this" class="line-dot" style="left: {{point.left}}%; top: {{point.top}}%;"></view>
+        </view>
+        <view class="chart-axis">
+          <text>{{item.timeLabels[0]}}</text>
+          <text>{{item.timeLabels[1]}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{device.type === 'light'}}" class="section">
+      <view class="section-title">灯光控制</view>
+      <view class="mode-tabs">
+        <button class="{{mode === 'color' ? 'active' : ''}}" data-mode="color" bindtap="setMode">彩色模式</button>
+        <button class="{{mode === 'white' ? 'active' : ''}}" data-mode="white" bindtap="setMode">色温模式</button>
+      </view>
+
+      <view class="slider-row">
+        <view class="slider-label">亮度 {{lightForm.brightness}}%</view>
+        <slider min="0" max="100" value="{{lightForm.brightness}}" data-key="brightness" bindchanging="onLightSlider" bindchange="onLightSlider" activeColor="#0f766e" />
+      </view>
+      <view wx:if="{{mode === 'white'}}" class="slider-row">
+        <view class="slider-label">冷暖 {{warmText}} · {{lightForm.warmth}}%</view>
+        <view class="warm-bar"></view>
+        <slider min="0" max="100" value="{{lightForm.warmth}}" data-key="warmth" bindchanging="onLightSlider" bindchange="onLightSlider" activeColor="#0f766e" />
+        <view class="range-labels">
+          <text>暖光</text>
+          <text>自然</text>
+          <text>冷白</text>
+        </view>
+      </view>
+      <view wx:if="{{mode === 'color'}}">
+        <view class="slider-row">
+          <view class="slider-label">颜色</view>
+          <view class="color-preview" style="background: hsl({{colorHue}}, 80%, 55%);"></view>
+          <view class="hue-bar"></view>
+          <slider min="0" max="100" value="{{lightForm.hueSlider}}" data-key="hue" bindchanging="onLightSlider" bindchange="onLightSlider" activeColor="#0f766e" />
+        </view>
+        <view class="slider-row">
+          <view class="slider-label">颜色浓淡 {{lightForm.saturation}}%</view>
+          <slider min="0" max="100" value="{{lightForm.saturation}}" data-key="saturation" bindchanging="onLightSlider" bindchange="onLightSlider" activeColor="#0f766e" />
+        </view>
+      </view>
+      <view class="send-state">{{pendingLight ? '正在下发...' : '拖动后自动生效'}}</view>
+    </view>
+
+    <view wx:if="{{device.type === 'speaker'}}" class="section">
+      <view class="section-title">语音播报</view>
+      <view class="speaker-help">支持文字播报和设备内置警示音，不支持在线播放音乐。</view>
+      <textarea class="speaker-input" maxlength="32" placeholder="输入要播报的内容" value="{{speakerText}}" bindinput="onSpeakerText"></textarea>
+      <button class="primary" bindtap="speakText">播报文字</button>
+      <view class="section-subtitle">内置警示音</view>
+      <view class="speaker-tones">
+        <button data-tone="alert_1" bindtap="playWarningTone">警示音 1</button>
+        <button data-tone="alert_2" bindtap="playWarningTone">警示音 2</button>
+        <button data-tone="alert_3" bindtap="playWarningTone">警示音 3</button>
+      </view>
+      <view class="speaker-help">计量插座功率达到 600W 时自动报警，降到 500W 以下后解除报警状态。</view>
+    </view>
+  </view>
+</view>
