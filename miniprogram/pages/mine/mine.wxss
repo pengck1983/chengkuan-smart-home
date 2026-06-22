@@ -10,13 +10,41 @@ button::after {
 }
 
 .profile-card,
-.panel {
+.panel,
+.guest-panel {
   box-sizing: border-box;
   margin-bottom: 22rpx;
   padding: 30rpx;
   border: 1rpx solid #dbe3ee;
   border-radius: 16rpx;
   background: #ffffff;
+}
+
+.guest-panel {
+  text-align: center;
+}
+
+.guest-avatar {
+  margin: 8rpx auto 22rpx;
+  background: #718096;
+}
+
+.guest-sub {
+  margin: 18rpx auto 0;
+  max-width: 560rpx;
+  line-height: 1.6;
+}
+
+.login-action {
+  width: 100%;
+  height: 82rpx;
+  margin-top: 32rpx;
+  border-radius: 10rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 82rpx;
+  background: #0f766e;
 }
 
 .profile-card {

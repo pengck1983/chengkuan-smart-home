@@ -1,5 +1,6 @@
 const api = require("../../utils/api");
 const deviceUtil = require("../../utils/device");
+const guestUtil = require("../../utils/guest");
 
 Page({
   data: {
@@ -7,6 +8,7 @@ Page({
     errorText: "",
     user: null,
     gateway: null,
+    guestMode: false,
     devices: [],
     sensorSummary: "--",
     runningSummary: "运行中 0"
@@ -19,12 +21,24 @@ Page({
   bootstrap() {
     const app = getApp();
     if (!app.globalData.token) {
-      wx.reLaunch({ url: "/pages/login/login" });
+      const devices = guestUtil.createGuestDevices();
+      wx.setStorageSync("guestMode", true);
+      this.setData({
+        user: null,
+        gateway: null,
+        guestMode: true,
+        devices,
+        sensorSummary: "-- °C",
+        runningSummary: "功能预览",
+        loading: false,
+        errorText: ""
+      });
       return;
     }
 
     this.setData({
       user: app.globalData.user,
+      guestMode: false,
       loading: true,
       errorText: ""
     });
@@ -68,16 +82,25 @@ Page({
   },
 
   refresh() {
+    if (!this.requireLogin()) {
+      return;
+    }
     this.loadGatewayAndDevices();
   },
 
   addDevice() {
+    if (!this.requireLogin()) {
+      return;
+    }
     wx.navigateTo({
       url: "/pages/add-device/add-device"
     });
   },
 
   openDevice(event) {
+    if (!this.requireLogin()) {
+      return;
+    }
     const deviceId = event.currentTarget.dataset.id;
     if (!deviceId) return;
     wx.navigateTo({
@@ -86,6 +109,9 @@ Page({
   },
 
   switchDevice(event) {
+    if (!this.requireLogin()) {
+      return;
+    }
     const deviceId = event.currentTarget.dataset.id;
     const type = event.currentTarget.dataset.type;
     const nextOn = parseBool(event.currentTarget.dataset.on);
@@ -111,6 +137,31 @@ Page({
           icon: "none"
         });
       });
+  },
+
+  goToLogin() {
+    wx.navigateTo({
+      url: "/pages/login/login"
+    });
+  },
+
+  requireLogin() {
+    if (getApp().globalData.token) {
+      return true;
+    }
+
+    wx.showModal({
+      title: "登录后使用",
+      content: "该功能需要微信登录。你可以取消并继续浏览游客体验。",
+      cancelText: "取消",
+      confirmText: "去登录",
+      success: (result) => {
+        if (result.confirm) {
+          this.goToLogin();
+        }
+      }
+    });
+    return false;
   }
 });
 

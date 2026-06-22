@@ -1,28 +1,37 @@
 <view class="page">
-  <view class="profile-card">
-    <view class="avatar">我</view>
-    <view>
-      <view class="name">{{user.nickname || '微信用户'}}</view>
-      <view class="sub">已登录成宽智慧小家</view>
+  <block wx:if="{{loggedIn}}">
+    <view class="profile-card">
+      <view class="avatar">我</view>
+      <view>
+        <view class="name">{{user.nickname || '微信用户'}}</view>
+        <view class="sub">已登录成宽智慧小家</view>
+      </view>
     </view>
-  </view>
 
-  <view class="panel">
-    <view class="panel-title">网关</view>
-    <view class="info-row">
-      <text>名称</text>
-      <text>{{gateway.name || '未绑定'}}</text>
+    <view class="panel">
+      <view class="panel-title">网关</view>
+      <view class="info-row">
+        <text>名称</text>
+        <text>{{gateway.name || '未绑定'}}</text>
+      </view>
+      <view class="info-row">
+        <text>MAC</text>
+        <text>{{gateway.gatewayMac || '--'}}</text>
+      </view>
+      <view class="info-row">
+        <text>状态</text>
+        <text>{{gateway.online ? '在线' : '等待上报'}}</text>
+      </view>
+      <button class="secondary" bindtap="addGateway">添加/更换网关</button>
     </view>
-    <view class="info-row">
-      <text>MAC</text>
-      <text>{{gateway.gatewayMac || '--'}}</text>
-    </view>
-    <view class="info-row">
-      <text>状态</text>
-      <text>{{gateway.online ? '在线' : '等待上报'}}</text>
-    </view>
-    <button class="secondary" bindtap="addGateway">添加/更换网关</button>
-  </view>
 
-  <button class="logout" bindtap="logout">退出登录</button>
+    <button class="logout" bindtap="logout">退出登录</button>
+  </block>
+
+  <view wx:else class="guest-panel">
+    <view class="avatar guest-avatar">客</view>
+    <view class="name">游客模式</view>
+    <view class="sub guest-sub">你可以继续浏览智家功能。登录后可绑定网关、查看和控制自己的设备。</view>
+    <button class="login-action" bindtap="goToLogin">微信登录</button>
+  </view>
 </view>

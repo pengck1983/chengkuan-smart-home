@@ -28,6 +28,14 @@
   <view wx:elif="{{errorText}}" class="state-card error">{{errorText}}</view>
 
   <view wx:else class="content">
+    <view wx:if="{{guestMode}}" class="guest-banner">
+      <view class="guest-copy">
+        <view class="guest-title">游客体验</view>
+        <view class="guest-description">当前展示功能示例，不会读取或控制真实设备。</view>
+      </view>
+      <button class="guest-login" bindtap="goToLogin">登录后连接我的设备</button>
+    </view>
+
     <view class="scene-card">回家</view>
 
     <view wx:if="{{!devices.length}}" class="state-card">

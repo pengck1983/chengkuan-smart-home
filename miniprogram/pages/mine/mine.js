@@ -1,18 +1,30 @@
 Page({
   data: {
-    user: null,
-    gateway: null
+    user: {},
+    gateway: {},
+    loggedIn: false
   },
 
   onShow() {
     const app = getApp();
     if (!app.globalData.token) {
-      wx.reLaunch({ url: "/pages/login/login" });
+      this.setData({
+        user: {},
+        gateway: {},
+        loggedIn: false
+      });
       return;
     }
     this.setData({
-      user: app.globalData.user,
-      gateway: app.globalData.gateway
+      user: app.globalData.user || {},
+      gateway: app.globalData.gateway || {},
+      loggedIn: true
+    });
+  },
+
+  goToLogin() {
+    wx.navigateTo({
+      url: "/pages/login/login"
     });
   },
 

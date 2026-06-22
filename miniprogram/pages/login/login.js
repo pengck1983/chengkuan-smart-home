@@ -54,6 +54,11 @@ Page({
     });
   },
 
+  continueAsGuest() {
+    wx.setStorageSync("guestMode", true);
+    this.goNext();
+  },
+
   goNext() {
     wx.switchTab({
       url: "/pages/index/index"

@@ -6,5 +6,11 @@
     微信一键登录
   </button>
 
+  <button class="guest-button" disabled="{{loading}}" bindtap="continueAsGuest">
+    暂不登录，先体验
+  </button>
+
+  <view class="guest-note">无需登录即可浏览主要功能，设备绑定和控制需要登录。</view>
+
   <view wx:if="{{errorText}}" class="error">{{errorText}}</view>
 </view>

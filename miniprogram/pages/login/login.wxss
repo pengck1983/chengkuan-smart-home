@@ -34,6 +34,30 @@
   border: 0;
 }
 
+.guest-button {
+  margin-top: 24rpx;
+  height: 88rpx;
+  border: 2rpx solid #0f766e;
+  border-radius: 8rpx;
+  color: #0f766e;
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 84rpx;
+  background: #ffffff;
+}
+
+.guest-button::after {
+  border: 0;
+}
+
+.guest-note {
+  margin-top: 24rpx;
+  color: #607086;
+  font-size: 24rpx;
+  line-height: 1.6;
+  text-align: center;
+}
+
 .error {
   margin-top: 28rpx;
   color: #b4233f;

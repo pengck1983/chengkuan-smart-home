@@ -18,6 +18,7 @@ App({
     this.globalData.user = user;
     wx.setStorageSync("token", token);
     wx.setStorageSync("user", user);
+    wx.removeStorageSync("guestMode");
   },
 
   setGateway(gateway) {
@@ -32,5 +33,6 @@ App({
     wx.removeStorageSync("token");
     wx.removeStorageSync("user");
     wx.removeStorageSync("gateway");
+    wx.removeStorageSync("guestMode");
   }
 });
