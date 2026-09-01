@@ -1,7 +1,7 @@
 function createPowerAlarmMonitor(options) {
   const settings = Object.assign({
-    thresholdWatts: 600,
-    resetWatts: 500,
+    thresholdWatts: 800,
+    resetWatts: 750,
     cooldownMs: 60000,
     now: () => Date.now(),
     onAlarm: () => true

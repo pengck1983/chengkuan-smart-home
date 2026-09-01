@@ -73,19 +73,19 @@ test("ignores other devices and missing power values", () => {
   assert.equal(count, 0);
 });
 
-test("uses the 600 watt alarm and 500 watt reset defaults", () => {
+test("uses the 800 watt alarm and 750 watt reset defaults", () => {
   let count = 0;
   const monitor = createPowerAlarmMonitor({
     now: () => 1000,
     onAlarm: () => { count += 1; }
   });
 
-  monitor.observe(socket(599));
-  monitor.observe(socket(600));
-  monitor.observe(socket(550));
-  monitor.observe(socket(600));
+  monitor.observe(socket(799));
+  monitor.observe(socket(800));
+  monitor.observe(socket(775));
+  monitor.observe(socket(800));
   assert.equal(count, 1);
-  monitor.observe(socket(499));
-  monitor.observe(socket(600));
+  monitor.observe(socket(749));
+  monitor.observe(socket(800));
   assert.equal(count, 2);
 });

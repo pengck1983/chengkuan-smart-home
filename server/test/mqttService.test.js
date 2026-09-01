@@ -8,7 +8,8 @@ process.env.MQTT_PASSWORD ||= "test-password";
 const {
   createRegistrationAck,
   createDeviceSyncAck,
-  markReportedOnline
+  markReportedOnline,
+  buildPowerAlarmMessage
 } = require("../mqttService");
 
 
@@ -73,4 +74,15 @@ test("marks a device online when it reports state", () => {
     params: { temperature: 2655 }
   });
   assert.equal(payload.online, false);
+});
+
+test("announces the numbered meter socket without a stale watt value", () => {
+  assert.equal(
+    buildPowerAlarmMessage({ name: "计量插座 01" }),
+    "警告，一号计量插座功率超过报警阈值"
+  );
+  assert.equal(
+    buildPowerAlarmMessage({ name: "计量插座 02" }),
+    "警告，二号计量插座功率超过报警阈值"
+  );
 });

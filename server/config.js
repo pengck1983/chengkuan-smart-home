@@ -21,8 +21,8 @@ const config = {
   appTokenSecret: process.env.APP_TOKEN_SECRET || "dev-secret",
   wechatAppId: process.env.WECHAT_APPID || "",
   wechatAppSecret: process.env.WECHAT_APPSECRET || "",
-  powerAlarmWatts: Number(process.env.POWER_ALARM_WATTS || 600),
-  powerAlarmResetWatts: Number(process.env.POWER_ALARM_RESET_WATTS || 500),
+  powerAlarmWatts: Number(process.env.POWER_ALARM_WATTS || 800),
+  powerAlarmResetWatts: Number(process.env.POWER_ALARM_RESET_WATTS || 750),
   powerAlarmCooldownMs: Number(process.env.POWER_ALARM_COOLDOWN_MS || 60000)
 };
 

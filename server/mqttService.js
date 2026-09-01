@@ -301,7 +301,7 @@ function announcePowerAlarm(socket, power) {
   try {
     controlSpeaker(socket.gatewayMac, speaker.deviceId, { tone: "alert_1" });
     controlSpeaker(socket.gatewayMac, speaker.deviceId, {
-      text: "警告，" + (socket.name || "计量插座") + "功率超过六百瓦"
+      text: buildPowerAlarmMessage(socket)
     });
     console.warn("[alarm] power threshold exceeded", socket.deviceId, power);
     return true;
@@ -309,6 +309,15 @@ function announcePowerAlarm(socket, power) {
     console.error("[alarm] speaker publish failed", error.message || error);
     return false;
   }
+}
+
+function buildPowerAlarmMessage(socket) {
+  const socketName = String((socket && socket.name) || "").trim();
+  const numberedSocket = socketName.match(/^计量插座\s*0*([12])$/);
+  const alarmName = numberedSocket
+    ? (numberedSocket[1] === "1" ? "一号" : "二号") + "计量插座"
+    : (socketName || "计量插座");
+  return "警告，" + alarmName + "功率超过报警阈值";
 }
 
 function readDeviceState(gatewayMac, deviceId, readAttr) {
@@ -368,6 +377,7 @@ module.exports = {
   controlSpeaker,
   readDeviceState,
   getStatus,
+  buildPowerAlarmMessage,
   createRegistrationAck,
   createDeviceSyncAck,
   markReportedOnline
