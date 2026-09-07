@@ -1,0 +1,20 @@
+[Unit]
+Description=Chengkuan Smart Home Node.js API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=chengkuan
+Group=chengkuan
+WorkingDirectory=/opt/chengkuan/apps/chengkuan-smart-home/server
+Environment=NODE_ENV=production
+EnvironmentFile=/opt/chengkuan/config/chengkuan-smart-home/server.env
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

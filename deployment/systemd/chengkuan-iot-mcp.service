@@ -1,0 +1,20 @@
+[Unit]
+Description=Chengkuan Smart Home Xiaozhi MCP Bridge
+After=network-online.target chengkuan-iot-server.service
+Wants=network-online.target
+Requires=chengkuan-iot-server.service
+
+[Service]
+Type=simple
+User=chengkuan
+Group=chengkuan
+WorkingDirectory=/opt/chengkuan/apps/chengkuan-smart-home/mcp-bridge
+EnvironmentFile=/opt/chengkuan/config/chengkuan-smart-home/mcp-bridge.env
+ExecStart=/opt/chengkuan/venvs/chengkuan-smart-home/bin/python mcp_pipe.py
+Restart=always
+RestartSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
