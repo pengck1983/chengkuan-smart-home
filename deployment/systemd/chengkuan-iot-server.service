@@ -9,6 +9,7 @@ User=chengkuan
 Group=chengkuan
 WorkingDirectory=/opt/chengkuan/apps/chengkuan-smart-home/server
 Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
 EnvironmentFile=/opt/chengkuan/config/chengkuan-smart-home/server.env
 ExecStart=/usr/bin/node server.js
 Restart=always

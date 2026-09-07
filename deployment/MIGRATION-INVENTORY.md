@@ -26,12 +26,24 @@
 ## ECS 与域名
 
 - ECS 实例 ID：`i-bp1hgw29o8lvfftr1l8p`。
+- 地域与可用区：华南 1（深圳）F。
 - SSH 用户：`ecs-user`。
 - SSH 私钥：`E:\chengkuan-iot-key.pem`。
-- ECS 公网 IPv4：等待从阿里云控制台核实。
+- ECS 公网 IPv4：`120.76.219.143`。
 - 主域名：`chengkuan-iot.cn`。
 - 第一阶段 API 域名：`api.chengkuan-iot.cn`。
 - DNS 当前未解析到 IPv4 地址。
+
+## ECS 部署状态
+
+- 代码：`/opt/chengkuan/apps/chengkuan-smart-home`。
+- 配置：`/opt/chengkuan/config/chengkuan-smart-home`，仅服务账户可读。
+- 数据：`/opt/chengkuan/data/chengkuan-smart-home/db.json`。
+- 已安装 Node.js 20、Python 3、Nginx、Git 和 rsync；服务器已有 4 GiB swap。
+- Node.js 生产校验和 28 项测试通过，Python 23 项测试通过。
+- Node.js 的 3000/3001 端口只监听 `127.0.0.1`。
+- 公网 80 端口经 Nginx 到 Node.js 的健康检查返回 200，MQTT 连接正常。
+- Node.js 和 MCP systemd 服务当前均为 `inactive/disabled`，正式切换前不与本机生产服务并行运行。
 
 ## 备份
 

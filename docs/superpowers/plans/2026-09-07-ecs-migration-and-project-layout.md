@@ -48,10 +48,12 @@
 - Create: `deployment/systemd/chengkuan-iot-mcp.service`
 - Create: `deployment/nginx/api.chengkuan-iot.cn.conf`
 
-- [ ] 使用 `E:\chengkuan-iot-key.pem` 登录 `ecs-user@ECS公网IP`。
-- [ ] 创建低权限服务账户和 `/opt/chengkuan` 目录。
-- [ ] 安装 Node.js 20、Python、Nginx、Git、rsync 和约 2 GiB swap。
-- [ ] 上传代码、配置和数据副本，安装依赖并启用 systemd 服务。
+- [x] 使用 `E:\chengkuan-iot-key.pem` 登录 `ecs-user@120.76.219.143`。
+- [x] 创建低权限服务账户和 `/opt/chengkuan` 目录。
+- [x] 安装 Node.js 20、Python、Nginx、Git、rsync；确认服务器已有 4 GiB swap。
+- [x] 上传代码、配置和数据副本并安装依赖。
+- [x] 安装 systemd 服务定义，但保持业务服务 `inactive/disabled`，等待正式切换。
+- [x] 验证 3000/3001 仅监听 `127.0.0.1`，并完成公网 IP 经 Nginx 到 Node.js 的临时健康检查。
 
 ### Task 4: 配置域名与 HTTPS
 

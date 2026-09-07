@@ -5,6 +5,7 @@ const config = require("./config");
 const store = require("./store");
 const mqttService = require("./mqttService");
 const { createMcpApp } = require("./mcpApi");
+const { listenOnHost } = require("./httpBinding");
 
 const app = express();
 
@@ -247,8 +248,8 @@ app.use((req, res) => {
 mqttService.startMqtt();
 setInterval(runDueSchedules, 20000);
 
-app.listen(config.port, () => {
-  console.log("[server] listening on http://localhost:" + config.port);
+listenOnHost(app, config.port, config.host, () => {
+  console.log("[server] listening on http://" + config.host + ":" + config.port);
 });
 
 const mcpApp = createMcpApp({ config, store, mqttService });

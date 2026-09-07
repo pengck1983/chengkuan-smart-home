@@ -10,6 +10,7 @@ function required(name) {
 
 const config = {
   port: Number(process.env.PORT || 3000),
+  host: process.env.HOST || "0.0.0.0",
   mcpApiPort: Number(process.env.MCP_API_PORT || 3001),
   mcpBridgeSecret: process.env.MCP_BRIDGE_SECRET || "",
   mqttUrl: required("MQTT_URL"),
